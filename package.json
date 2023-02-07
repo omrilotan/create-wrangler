@@ -1,0 +1,39 @@
+{
+  "name": "create-wrangler",
+  "version": "0.1.0",
+  "description": "🌩️ Create a wrangler.toml file from a programmable template, presented as a Javascript file",
+  "keywords": [
+    "wrangler",
+    "cloudflare",
+    "worker",
+    "template",
+    "🌩️"
+  ],
+  "author": "omrilotan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omrilotan/create-wrangler.git"
+  },
+  "license": "Unlicense",
+  "main": "index.js",
+  "type": "module",
+  "bin": "bin.js",
+  "files": [
+    "index.js",
+    "bin.js"
+  ],
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
+    "start": "node bin.js"
+  },
+  "devDependencies": {
+    "jest": "^29.4.1",
+    "prettier": "^2.8.3",
+    "prettier-plugin-toml": "^0.3.1"
+  },
+  "dependencies": {
+    "@ltd/j-toml": "^1.38.0"
+  }
+}
