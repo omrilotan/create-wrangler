@@ -26,9 +26,7 @@ export async function createWrangler({
 		destinationParts.unshift(process.cwd());
 	}
 	const destinationFile = join(...destinationParts);
-	console.info(
-		`Create wrangler.toml from ${sourceFile} to ${destinationFile}\n`
-	);
+	console.info(`Parse ${sourceFile} to ${destinationFile}\n`);
 
 	const inputFile = await import(sourceFile);
 	if (typeof inputFile.template !== "function") {
