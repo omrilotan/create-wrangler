@@ -16,7 +16,7 @@ The code file is used to build a `wrangler.toml` file, to be used by `wrangler`.
 ## Usage
 
 ```sh
-npm create wrangler@0 [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
+npm create wrangler [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
 ```
 
 ### Arguments

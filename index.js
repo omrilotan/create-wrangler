@@ -8,7 +8,6 @@ import TOML from "@ltd/j-toml";
  * @typedef {Object} Options
  * @property {string} [input=wragler.tmpl.js] - The source file to use as a template
  * @property {string} [output=<current directory>] - The destination directory to write the wragler.toml file to
- * @property {string} [directory=<current directory>] - The directory to use as the base for the source and destination
  */
 export async function createWrangler({
 	input = "wrangler.tmpl.js",

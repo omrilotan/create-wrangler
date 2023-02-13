@@ -12,22 +12,24 @@ const HELP = [
 const [, , ...args] = process.argv;
 
 const {
-	destination = "",
-	help = false,
-	source = "wrangler.tmpl.js",
-} = parseArgs(args, {
-	input: {
-		type: "string",
-		alias: "si",
+	values: { input, output, help },
+} = parseArgs({
+	args,
+	options: {
+		input: {
+			type: "string",
+			alias: "si",
+		},
+		output: {
+			type: "string",
+			alias: "0",
+		},
+		help: {
+			type: "boolean",
+			alias: "h",
+		},
 	},
-	output: {
-		type: "string",
-		alias: "0",
-	},
-	help: {
-		type: "boolean",
-		alias: "h",
-	},
+	allowPositionals: true,
 });
 
 if (help) {
@@ -36,7 +38,7 @@ if (help) {
 }
 
 try {
-	createWrangler({ source, destination, directory: process.cwd() });
+	createWrangler({ input, output });
 } catch (error) {
 	console.error(error);
 	console.info(`\n\n\n${HELP}`);
