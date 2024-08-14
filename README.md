@@ -128,13 +128,13 @@ dataset = 'MY_WORKER_ANALYTICS'
 
 ### package.json entry
 
-In this example, the `predeploy` script will create the `wrangler.toml` file before the `deploy` script runs `wrangler publish`.
+In this example, the `predeploy` script will create the `wrangler.toml` file before the `deploy` script runs `wrangler deploy`.
 
 ```json
 {
 	"scripts": {
 		"predeploy": "npm_config_yes=true npm create wrangler",
-		"deploy": "wrangler publish"
+		"deploy": "wrangler deploy"
 	}
 }
 ```
