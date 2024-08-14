@@ -1,7 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`create-wrangler should create a wrangler.toml file from a template 1`] = `
-"name = 'my-worker'
+name = 'my-worker'
 main = 'src/index.ts'
 compatibility_date = '2022-07-04'
 workers_dev = false
@@ -31,5 +28,4 @@ LOG_LEVEL = 'warn'
 [[env.production.unsafe.bindings]]
 type = 'analytics_engine'
 name = 'MY_WORKER_ANALYTICS'
-dataset = 'MY_WORKER_ANALYTICS'"
-`;
+dataset = 'MY_WORKER_ANALYTICS'

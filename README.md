@@ -10,8 +10,16 @@ Repetitive parts can be used as variables and collections can be built with code
 
 The code file is used to build a `wrangler.toml` file, to be used by `wrangler`.
 
-| ![](https://user-images.githubusercontent.com/516342/217273227-cd0c7ea5-2d89-465a-8e77-dbbcd3f4462e.png)
+| ![](https://github.com/user-attachments/assets/943e19d7-a67b-42c5-9ab7-44db576dabff)
 | -
+
+> ✔︎ Use programmatic constructs to build configuration
+>
+> ✔︎ Use environment variables to exclude sensitive data
+>
+> ✔︎ Test the configuration file
+>
+> ✔︎ Use Typescript or Javascript files
 
 ## Usage
 
@@ -28,14 +36,16 @@ npm create wrangler [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
 
 The input file exports a named function: `template`, which receives a single argument: the TOML object.
 
+This file can be a Javascript (.js) or Typescript file (.ts)
+
 ```js
-const subdomains = ["", "www.", "es."];
-const paths = ["/", "/app*", "/admin*"];
-const ZONE = "example.com";
 const {
 	ACCOUNT_ID = "96b57b07c3394752a79b623f49bc5163",
 	KV_NAMESPAC_ID = "798d14f4b4c949d185fcf39b0f593ac7",
 } = process.env;
+const ZONE = "example.com";
+const subdomains = ["", "www.", "es."];
+const paths = ["/", "/app*", "/admin*"];
 
 export const template = ({ Section }) => ({
 	name: "my-worker",
@@ -51,7 +61,7 @@ export const template = ({ Section }) => ({
 				paths.map((path) => ({
 					pattern: [subdomain, ZONE, path].join(""),
 					zone_name: ZONE,
-				}))
+				})),
 			),
 			vars: Section({
 				LOG_LEVEL: "warn",
