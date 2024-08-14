@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.2
+
+- Fix auto search for .ts files
+
 ## 0.3.1
 
 - Search for wrangler.tmpl.js or wrangler.tmpl.ts in the current directory if the input file is not provided.

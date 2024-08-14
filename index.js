@@ -12,15 +12,13 @@ const TEMP_TS_OUTPUT = "TEMP_TS_OUTPUT";
  * @property {string} [input=wragler.tmpl.js] - The source file to use as a template
  * @property {string} [output=<current directory>] - The destination directory to write the wragler.toml file to
  */
-export async function createWrangler({ input, output = "" }) {
+export async function createWrangler({ input, output = "" } = {}) {
 	if (!input) {
 		try {
 			await access("wrangler.tmpl.js");
 			input = "wrangler.tmpl.js";
 		} catch (error) {
-			throw new Error(
-				`No input file provided and "wrangler.tmpl.js" not found.`,
-			);
+			// ignore
 		}
 	}
 	if (!input) {
@@ -28,9 +26,7 @@ export async function createWrangler({ input, output = "" }) {
 			await access("wrangler.tmpl.ts");
 			input = "wrangler.tmpl.ts";
 		} catch (error) {
-			throw new Error(
-				`No input file provided and "wrangler.tmpl.ts" not found.`,
-			);
+			// ignore
 		}
 	}
 	if (!input) {
@@ -46,11 +42,10 @@ export async function createWrangler({ input, output = "" }) {
 		output.replace(/wrangler\.toml$/, ""),
 		"wrangler.toml",
 	];
-	if (output.startsWith("/")) {
+	if (!output.startsWith("/")) {
 		destinationParts.unshift(process.cwd());
 	}
 	const destinationFile = join(...destinationParts);
-	console.info(`Parse ${sourceFile} to ${destinationFile}\n`);
 
 	const { template } = await importOrCompile(sourceFile);
 	if (typeof template !== "function") {
@@ -75,9 +70,12 @@ export async function createWrangler({ input, output = "" }) {
 	const config = template(TOML);
 	const content = TOML.stringify(config, TOMLOptions).trim();
 	try {
+		// Create the destination directory if it doesn't exist
+		await mkdir(join(destinationFile, ".."), { recursive: true });
 		await writeFile(destinationFile, content);
+		return `Parsed ${sourceFile} to ${destinationFile}`;
 	} catch (error) {
-		console.error(error);
+		throw error;
 	}
 }
 
@@ -96,6 +94,7 @@ async function importOrCompile(sourceFile) {
 				platform: "neutral",
 				bundle: true,
 				sourcemap: false,
+				silent: true,
 			});
 			sourceFile = join(outDir, basename(sourceFile).replace(/\.ts$/, ".js"));
 			const returnValue = await import(sourceFile);

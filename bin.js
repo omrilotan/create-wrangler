@@ -6,7 +6,7 @@ import { createWrangler } from "./index.js";
 const HELP = [
 	"cretae-wrangler: Create a wrangler.toml file from a template",
 	"------------------------------------------------------------",
-	"Usage: npm create wrangler -- --input=wrangler.tmpl.cjs --output=wrangler.toml",
+	"Usage: npm create wrangler -- [--input=wrangler.tmpl.js] [--output=wrangler.toml] [--silent]",
 ].join("\n");
 
 const [, , ...args] = process.argv;
@@ -18,11 +18,14 @@ const {
 	options: {
 		input: {
 			type: "string",
-			alias: "si",
+			alias: "i",
 		},
 		output: {
 			type: "string",
-			alias: "0",
+			alias: "o",
+		},
+		silent: {
+			type: "boolean",
 		},
 		help: {
 			type: "boolean",
@@ -38,7 +41,7 @@ if (help) {
 }
 
 try {
-	createWrangler({ input, output });
+	console.info(await createWrangler({ input, output }));
 } catch (error) {
 	console.error(error);
 	console.info(`\n\n\n${HELP}`);

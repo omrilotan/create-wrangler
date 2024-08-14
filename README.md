@@ -33,6 +33,10 @@ npm create wrangler -- [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
 
 --output (-o): The path to the destination file. Defaults to `./wrangler.toml`.
 
+--silent: Do not output the result to the console.
+
+--help: Display help message.
+
 ### Input file
 
 The input file exports a named function: `template`, which receives a single argument: the TOML object.

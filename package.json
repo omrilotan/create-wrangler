@@ -1,6 +1,6 @@
 {
   "name": "create-wrangler",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "🌩️ Create a wrangler.toml file from a programmable template, presented as a Javascript file",
   "keywords": [
     "wrangler",
@@ -25,12 +25,13 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "test": "node test.js",
+    "test": "node --test --experimental-test-coverage test.js",
     "start": "node bin.js"
   },
   "devDependencies": {
     "prettier": "^3.3.3",
-    "prettier-plugin-toml": "^2.0.1"
+    "prettier-plugin-toml": "^2.0.1",
+    "rimraf": "^6.0.1"
   },
   "dependencies": {
     "@ltd/j-toml": "^1.38.0",
