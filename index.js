@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { promises } from "node:fs";
+import { access, writeFile, mkdir, rm } from "node:fs/promises";
 import { join, basename } from "node:path";
 import TOML from "@ltd/j-toml";
 import { build } from "tsup";
@@ -12,10 +12,31 @@ const TEMP_TS_OUTPUT = "TEMP_TS_OUTPUT";
  * @property {string} [input=wragler.tmpl.js] - The source file to use as a template
  * @property {string} [output=<current directory>] - The destination directory to write the wragler.toml file to
  */
-export async function createWrangler({
-	input = "wrangler.tmpl.js",
-	output = "",
-}) {
+export async function createWrangler({ input, output = "" }) {
+	if (!input) {
+		try {
+			await access("wrangler.tmpl.js");
+			input = "wrangler.tmpl.js";
+		} catch (error) {
+			throw new Error(
+				`No input file provided and "wrangler.tmpl.js" not found.`,
+			);
+		}
+	}
+	if (!input) {
+		try {
+			await access("wrangler.tmpl.ts");
+			input = "wrangler.tmpl.ts";
+		} catch (error) {
+			throw new Error(
+				`No input file provided and "wrangler.tmpl.ts" not found.`,
+			);
+		}
+	}
+	if (!input) {
+		throw new Error(`No input file provided. (e.g. --input wrangler.tmpl.js)`);
+	}
+
 	const sourceParts = [input];
 	if (!input.startsWith("/")) {
 		sourceParts.unshift(process.cwd());
@@ -54,7 +75,7 @@ export async function createWrangler({
 	const config = template(TOML);
 	const content = TOML.stringify(config, TOMLOptions).trim();
 	try {
-		await promises.writeFile(destinationFile, content);
+		await writeFile(destinationFile, content);
 	} catch (error) {
 		console.error(error);
 	}
@@ -67,7 +88,7 @@ async function importOrCompile(sourceFile) {
 	if (/\.ts$/.test(sourceFile)) {
 		try {
 			const outDir = join(process.cwd(), TEMP_TS_OUTPUT);
-			await promises.mkdir(outDir, { recursive: true });
+			await mkdir(outDir, { recursive: true });
 			await build({
 				entry: [sourceFile],
 				outDir: outDir,
@@ -77,12 +98,11 @@ async function importOrCompile(sourceFile) {
 				sourcemap: false,
 			});
 			sourceFile = join(outDir, basename(sourceFile).replace(/\.ts$/, ".js"));
-			console.log({ sourceFile });
 			const returnValue = await import(sourceFile);
-			await promises.rm(outDir, { recursive: true });
+			await rm(outDir, { recursive: true });
 			return returnValue;
 		} catch (error) {
-			await promises.rm(join(process.cwd(), TEMP_TS_OUTPUT), {
+			await rm(join(process.cwd(), TEMP_TS_OUTPUT), {
 				recursive: true,
 			});
 			throw error;

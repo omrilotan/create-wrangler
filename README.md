@@ -24,12 +24,13 @@ The code file is used to build a `wrangler.toml` file, to be used by `wrangler`.
 ## Usage
 
 ```sh
-npm create wrangler [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
+npm create wrangler -- [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
 ```
 
 ### Arguments
 
---input (-i): The path to the template file. Defaults to `./wrangler.tmpl.js`.
+--input (-i): The path to the template file. Defaults to `./wrangler.tmpl.js` or `./wrangler.tmpl.ts`.
+
 --output (-o): The path to the destination file. Defaults to `./wrangler.toml`.
 
 ### Input file

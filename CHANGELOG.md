@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.1
+
+- Search for wrangler.tmpl.js or wrangler.tmpl.ts in the current directory if the input file is not provided.
+
 ## 0.3.0
 
 - Support typescript template files as input.

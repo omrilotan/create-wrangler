@@ -6,9 +6,9 @@ import { createWrangler } from "./index.js";
 const output = "fixtures/wrangler.toml";
 
 [
-	["template.1.js", "template.1.toml"],
-	["template.2.ts", "template.2.toml"],
-	["template.3.ts", "template.3.toml"],
+	["test.1.tmpl.js", "test.1.expected.toml"],
+	["test.2.tmpl.ts", "test.2.expected.toml"],
+	["test.3.tmpl.ts", "test.3.expected.toml"],
 ].forEach(([input, expected]) => {
 	test(`should create a wrangler.toml file from ${input}`, async () => {
 		await createWrangler({ input: `fixtures/${input}`, output });
