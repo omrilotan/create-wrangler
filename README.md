@@ -39,7 +39,7 @@ npm create wrangler -- [--input ./wrangler.tmpl.js] [--output ./wrangler.toml]
 
 ### Input file
 
-The input file exports a named function: `template`, which receives a single argument: the TOML object.
+The input file exports a named function: `template`, which receives a single argument: [the TOML object](https://www.npmjs.com/package/@ltd/j-toml).
 
 This file can be a Javascript (.js) or Typescript file (.ts)
 
