@@ -30,6 +30,7 @@ describe("createWrangler", () => {
 		["test.1.tmpl.js", "test.1.expected.toml"],
 		["test.2.tmpl.ts", "test.2.expected.toml"],
 		["test.3.tmpl.ts", "test.3.expected.toml"],
+		["test.4.tmpl.js", "test.4.expected.toml"],
 	].forEach(([input, expected]) => {
 		it(`should create a wrangler.toml file from ${input}`, async () => {
 			const outputFile = `wrangler.toml`;

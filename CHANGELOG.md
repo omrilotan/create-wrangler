@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.0
+
+- Allow the input "template" function to be asynchronous.
+
 ## 0.3.2
 
 - Fix auto search for .ts files

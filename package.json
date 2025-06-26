@@ -1,6 +1,6 @@
 {
   "name": "create-wrangler",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "🌩️ Create a wrangler.toml file from a programmable template, presented as a Javascript file",
   "keywords": [
     "wrangler",

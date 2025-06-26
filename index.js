@@ -67,7 +67,7 @@ export async function createWrangler({ input, output = "" } = {}) {
 	 * @param {TOMLOptions} TOMLOptions
 	 * @returns void
 	 */
-	const config = template(TOML);
+	const config = await template(TOML);
 	const content = TOML.stringify(config, TOMLOptions).trim();
 	try {
 		// Create the destination directory if it doesn't exist

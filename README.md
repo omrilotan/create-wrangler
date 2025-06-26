@@ -20,6 +20,8 @@ The code file is used to build a `wrangler.toml` file, to be used by `wrangler`.
 > ✔︎ Test the configuration file
 >
 > ✔︎ Use Typescript or Javascript files
+>
+> ✔︎ Build the template asynchronously
 
 ## Usage
 
@@ -52,7 +54,7 @@ const ZONE = "example.com";
 const subdomains = ["", "www.", "es."];
 const paths = ["/", "/app*", "/admin*"];
 
-export const template = ({ Section }) => ({
+export const template = async ({ Section }) => ({
 	name: "my-worker",
 	main: "src/index.ts",
 	compatibility_date: "2022-07-04",
@@ -70,6 +72,9 @@ export const template = ({ Section }) => ({
 			),
 			vars: Section({
 				LOG_LEVEL: "warn",
+				REMOTE_VARIABLE: await fetch(
+					"https://example.com/remote-variable",
+				).then((res) => res.text()),
 			}),
 			kv_namespaces: [
 				{

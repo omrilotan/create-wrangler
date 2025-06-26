@@ -1,0 +1,24 @@
+name = 'my-worker'
+main = 'src/index.ts'
+compatibility_date = '2022-07-04'
+workers_dev = false
+account_id = '96b57b07c3394752a79b623f49bc5163'
+
+[env.production]
+name = 'my-worker-production'
+main = 'src/index.ts'
+routes = [
+	{ pattern = 'example.com/', zone_name = 'example.com' },
+	{ pattern = 'example.com/app*', zone_name = 'example.com' },
+	{ pattern = 'example.com/admin*', zone_name = 'example.com' },
+	{ pattern = 'www.example.com/', zone_name = 'example.com' },
+	{ pattern = 'www.example.com/app*', zone_name = 'example.com' },
+	{ pattern = 'www.example.com/admin*', zone_name = 'example.com' },
+	{ pattern = 'es.example.com/', zone_name = 'example.com' },
+	{ pattern = 'es.example.com/app*', zone_name = 'example.com' },
+	{ pattern = 'es.example.com/admin*', zone_name = 'example.com' },
+]
+
+[env.production.vars]
+LOG_LEVEL = 'warn'
+KEY = 'Balue'
