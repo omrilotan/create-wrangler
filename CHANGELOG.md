@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.0
+
+- Allow native TypeScript imports (Node.js v23.6.0 or later).
+
 ## 0.4.0
 
 - Allow the input "template" function to be asynchronous.

@@ -83,8 +83,18 @@ async function importOrCompile(sourceFile) {
 	if (/\.c?js$/.test(sourceFile)) {
 		return await import(sourceFile);
 	}
-	if (/\.ts$/.test(sourceFile)) {
+	if (/\.m?ts$/.test(sourceFile)) {
 		try {
+			return await import(sourceFile, { assert: { type: "ts" } });
+		} catch (error) {
+			if (error.code !== "ERR_UNKNOWN_FILE_EXTENSION") {
+				// If the error is not related to unknown file extension, rethrow it
+				console.log("Error importing TypeScript", sourceFile);
+				throw error;
+			}
+		}
+		try {
+			console.log("Compiling TypeScript file with tsup...");
 			const outDir = join(process.cwd(), TEMP_TS_OUTPUT);
 			await mkdir(outDir, { recursive: true });
 			await build({

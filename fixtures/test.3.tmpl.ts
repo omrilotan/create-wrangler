@@ -1,4 +1,4 @@
-import { account_id, KV_NAMESPAC_ID } from "./test.3.files";
+import { account_id, KV_NAMESPAC_ID } from "./test.3.files.ts";
 
 const subdomains = ["", "www.", "es."];
 const paths = ["/", "/app*", "/admin*"];
