@@ -87,8 +87,12 @@ async function importOrCompile(sourceFile) {
 		try {
 			return await import(sourceFile, { assert: { type: "ts" } });
 		} catch (error) {
-			if (error.code !== "ERR_UNKNOWN_FILE_EXTENSION") {
-				// If the error is not related to unknown file extension, rethrow it
+			// Unsupported file or directory imports can be worked around with the typescript compiler
+			if (
+				!["ERR_UNSUPPORTED_DIR_IMPORT", "ERR_UNKNOWN_FILE_EXTENSION"].includes(
+					error.code,
+				)
+			) {
 				console.log("Error importing TypeScript", sourceFile);
 				throw error;
 			}

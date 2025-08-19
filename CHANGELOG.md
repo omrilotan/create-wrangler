@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.1
+
+- Allow ts compiler workaround for directory imports (unsupported in native Node.js TypeScript)
+
 ## 0.5.0
 
 - Allow native TypeScript imports (Node.js v23.6.0 or later).
